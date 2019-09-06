@@ -1,0 +1,24 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost/WebsiteCheck
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+
+  mvc:
+    static-path-pattern: /static/**
+
+  mail:
+    host: smtp.163.com
+    username: nj_gis@163.com
+    password: 1qaz2wsx
+    default-encoding: UTF-8
+    protocol: smtp
+    port: 25
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.starttls.enable: true
+    properties.mail.smtp.starttls.required: true
+    
