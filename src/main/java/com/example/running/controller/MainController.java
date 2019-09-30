@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -28,6 +29,12 @@ import java.util.List;
 @RestController
 @EnableScheduling
 public class MainController {
+
+    @Value("${managerEmail}")
+    String managerEmail;
+
+    @Value("${watcherEmail}")
+    String watcherEmail;
 
     @Autowired
     WebsiteDao websiteDao;
@@ -126,8 +133,12 @@ public class MainController {
 
         logger.info(website.getAddress()+"  "+dateFormat.format(new Date())+"  "+code);
 
-        if(code!=200&&code!=302){
+        if(code==-1){
+            sendEmail(website.getEmail(),website.getAddress()+"\n访问超时");
+        }
+        else if(code!=200&&code!=302){
             sendEmail(website.getEmail(),website.getAddress()+"\n网站无法访问，code:"+code+"\nTimeStamp:"+new Date().getTime());
+            //sendEmail(watcherEmail,website.getAddress()+"\n网站无法访问，code:"+code+"\n管理者:"+website.getManager()+"\nTimeStamp:"+new Date().getTime());
         }
         else{
 //            sendEmail(website.getEmail(),website.getAddress()+"\n网站访问正常，code:"+code);

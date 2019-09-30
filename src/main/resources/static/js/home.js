@@ -1,4 +1,4 @@
-var prefix="/running";
+var prefix=""//"/running";
 new Vue({
     el: '#app',
     data: function () {

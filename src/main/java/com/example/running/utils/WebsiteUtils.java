@@ -12,8 +12,8 @@ public class WebsiteUtils {
             conn = (HttpURLConnection) realUrl.openConnection();
             conn.setRequestMethod("GET");
             conn.setUseCaches(false);
-            conn.setReadTimeout(10000);
-            conn.setConnectTimeout(10000);
+            conn.setReadTimeout(6000);
+            conn.setConnectTimeout(6000);
             conn.setInstanceFollowRedirects(false);
             conn.setRequestProperty("User-Agent","Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0");
             return conn.getResponseCode();
